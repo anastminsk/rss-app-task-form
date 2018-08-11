@@ -1,11 +1,10 @@
 import { combineReducers } from 'redux';
-/*import board from './board';
-import cards from './cards';
-import profile from './profile';
-import score from './score';*/
+import card from './card';
+import score from './score';
 
 const rootReducer = combineReducers({
-  
+  card,
+  score
 });
 
 export default rootReducer;

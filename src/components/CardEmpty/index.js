@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fillCard, setScore } from '../../ac';
 import { 
   Card, 
   CardHeader, 
@@ -15,6 +17,38 @@ import {
 import './index.css';
 
 class CardEmpty extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      repo: this.props.repo,
+      comments: this.props.comments
+    };
+    this.handleChangeRepo = this.handleChangeRepo.bind(this);
+    this.handleChangeComments = this.handleChangeComments.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChangeRepo(e) {
+    this.setState({
+      repo: e.target.value
+    });
+  }
+
+  handleChangeComments(e) {
+    this.setState({
+      comments: e.target.value
+    });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    let a = Math.random() * 100;
+    let d = new Date();
+    this.props.fillCard(this.state.repo, this.state.comments, d.getTime());
+    this.props.setScore(Math.round(a));
+    this.props.history.push('/result');
+  }
+
   render() {
     return (
       <Card className="card-empty">
@@ -25,14 +59,32 @@ class CardEmpty extends Component {
         </CardBody>
         <CardFooter>
           <small className="text-muted">
-            <Form>
+            <Form onSubmit={this.handleSubmit}>
               <FormGroup>
-                <Label for="exampleEmail">Choose repo</Label>
-                <Input type="email" name="email" id="exampleEmail" placeholder="Enter link" bsSize="sm"/>
+                <Label for="taskUrl">Choose repo</Label>
+                <Input 
+                  type="url" 
+                  name="url" 
+                  id="taskUrl" 
+                  placeholder="Enter link" 
+                  bsSize="sm"
+                  required
+                  value={this.state.repo} 
+                  onChange={this.handleChangeRepo}
+                />
               </FormGroup>
               <FormGroup>
-                <Label for="exampleText">Comments</Label>
-                <Input type="textarea" name="text" id="exampleText" rows="5" placeholder="Write comments here" bsSize="sm"/>
+                <Label for="taskText">Comments</Label>
+                <Input 
+                  type="textarea" 
+                  name="text" 
+                  id="taskText" 
+                  rows="5" 
+                  placeholder="Write comments here" 
+                  bsSize="sm"
+                  value={this.state.comments}
+                  onChange={this.handleChangeComments}
+                />
               </FormGroup>
               <Button className="submit-btn">Submit</Button>
             </Form>
@@ -43,4 +95,9 @@ class CardEmpty extends Component {
   }
 }
 
-export default CardEmpty;
+const mapStateToProps = (state) => ({
+  repo: state.card.repo,
+  comments: state.card.comments
+});
+
+export default connect(mapStateToProps, { fillCard, setScore })(CardEmpty);

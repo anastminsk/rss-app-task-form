@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { 
   Card, 
   CardHeader, 
@@ -12,7 +13,7 @@ class CardSuccess extends Component {
   render() {
     return (
       <Card className="card-success border-success">
-        <CardHeader className="bg-success text-white">Done! <span className="score-success">100%</span></CardHeader>
+        <CardHeader className="bg-success text-white">Done! <span className="score-success">{this.props.score}%</span></CardHeader>
         <CardBody className="card-success-body">
           <CardTitle className="card-success-title">Correct expression</CardTitle>
           <CardText>Some quick example text to build on the card title.</CardText>
@@ -22,4 +23,8 @@ class CardSuccess extends Component {
   }
 }
 
-export default CardSuccess;
+const mapStateToProps = (state) => ({
+  score: state.score.data
+});
+
+export default connect(mapStateToProps)(CardSuccess);
