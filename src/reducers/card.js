@@ -1,9 +1,11 @@
 import { FILL_CARD } from '../constants';
 
 const initialState = {
+  title: 'Exchange money',
+  description: 'Some quick example text to build on the card title; https://github.com/yankouskia/',
   repo: '',
   comments: '',
-  time: 0
+  time: 0,
 };
 
 const card = (state = initialState, action) => {

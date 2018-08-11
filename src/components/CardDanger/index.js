@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { 
   Card, 
   CardHeader, 
@@ -10,16 +11,22 @@ import './index.css';
 
 class CardDanger extends Component {
   render() {
+    const { title, description } = this.props;
     return (
       <Card className="card-danger border-danger">
         <CardHeader className="bg-danger text-white">The deadline has passed</CardHeader>
         <CardBody className="card-danger-body">
-          <CardTitle className="card-danger-title">Correct expression</CardTitle>
-          <CardText>Some quick example text to build on the card title.</CardText>
+          <CardTitle className="card-danger-title">{title}</CardTitle>
+          <CardText>{description}</CardText>
         </CardBody>
       </Card>
     );
   }
 }
 
-export default CardDanger;
+const mapStateToProps = (state) => ({
+  title: state.card.title,
+  description: state.card.description
+});
+
+export default connect(mapStateToProps)(CardDanger);

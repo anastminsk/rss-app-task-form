@@ -41,21 +41,23 @@ class CardEmpty extends Component {
   }
 
   handleSubmit(e) {
+    const { fillCard, setScore, history } = this.props;
     e.preventDefault();
     let a = Math.random() * 100;
     let d = new Date();
-    this.props.fillCard(this.state.repo, this.state.comments, d.getTime());
-    this.props.setScore(Math.round(a));
-    this.props.history.push('/result');
+    fillCard(this.state.repo, this.state.comments, d.getTime());
+    setScore(Math.round(a));
+    history.push('/result');
   }
 
   render() {
+    const { title, description } = this.props;
     return (
       <Card className="card-empty">
         <CardHeader>Not submitted yet!</CardHeader>
         <CardBody>
-          <CardTitle className="card-empty-title">Correct expression</CardTitle>
-          <CardText>Some quick example text to build on the card title.</CardText>
+          <CardTitle className="card-empty-title">{title}</CardTitle>
+          <CardText>{description}</CardText>
         </CardBody>
         <CardFooter>
           <small className="text-muted">
@@ -96,6 +98,8 @@ class CardEmpty extends Component {
 }
 
 const mapStateToProps = (state) => ({
+  title: state.card.title,
+  description: state.card.description,
   repo: state.card.repo,
   comments: state.card.comments
 });

@@ -10,7 +10,7 @@ class Result extends Component {
     if (this.props.time > DEADLINE.getTime()) {
       return <CardDanger />;
     } else {
-      if (this.props.score === 100) {
+      if (this.props.score >= 100) {
         return <CardSuccess />;
       } else {
         return <CardWarning />;
