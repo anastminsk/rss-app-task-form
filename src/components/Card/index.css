@@ -1,16 +1,16 @@
-.card-warning {
+.card {
   width: 40vw;
   margin: 50px auto;
 }
 
-.card-warning-title {
+.card-title {
   text-transform: uppercase;
 }
 
-.card-warning-body {
+.card-body {
   padding-bottom: 100px;
 }
 
-.score-warning {
+.score {
   float: right;
 }
