@@ -15,19 +15,19 @@ class CardTemplate extends Component {
     return (
       <Card className={`card border-${type}`}>
         <CardHeader className={`bg-${type} text-white`}>
-        	{
-        		(type === 'success') ? 
-        			<Fragment>
+          {
+            (type === 'success') ? 
+              <Fragment>
                 Done! <span className="score">{score}%</span>
               </Fragment> :
-        		(type === 'warning') ? 
-        			<Fragment>
+            (type === 'warning') ? 
+              <Fragment>
                 Not submitted yet! <span className="score">{score}%</span>
               </Fragment> :
-        		<Fragment>
+            <Fragment>
               The deadline has passed
             </Fragment>
-        	}
+          }
         </CardHeader>
         <CardBody className="card-body">
           <CardTitle className="card-title">{title}</CardTitle>
